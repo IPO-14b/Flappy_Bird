@@ -19,7 +19,34 @@
             Splash: 0, Game: 1, Score: 2
         },
         
-        birb={},
+        birb={
+            x: 80,
+            y: 100,
+            frame:0,
+            animation: [0,1,2,1],
+            rotation :0,
+            gravity: 0.25,
+            velocity: 0,
+            _jump: 4.6,
+            
+            jump: function(){
+                this.velocity = -this._jump;
+            },
+            
+            update: function(){
+                
+            },
+            
+            draw: function(ctx){
+                ctx.save();
+                ctx.translate(this.x,this.y);
+                ctx.rotate(this.rotation);
+                
+                var n=this.animation[this.frame];
+                s_bird[n].draw(ctx,-s_bird[n].width/2, -s_bird[n].height/2);
+                ctx.restore();
+            }
+        },
         
         pipes = {};
         
@@ -72,6 +99,8 @@
             
             s_bg.draw(ctx, 0, height - s_bg.height);
 	        s_bg.draw(ctx, s_bg.width, height - s_bg.height);
+            
+            birb.draw(ctx);
             
             s_fg.draw(ctx, fgpos, height - s_fg.height);
             s_fg.draw(ctx, fgpos+s_fg.width, height - s_fg.height);
