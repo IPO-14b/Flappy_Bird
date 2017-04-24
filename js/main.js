@@ -20,7 +20,9 @@ var canvas, ctx, width, height,
             },
             
             update: function(){
-                
+                var n  = currentstate===states.Splash ? 10: 5;
+                this.frame+= frames % n === 0 ? 1: 0;
+                this.frame %=this.animation.length;
             },
             
             draw: function(ctx){
@@ -34,7 +36,15 @@ var canvas, ctx, width, height,
             }
         },
         
-        pipes = {};
+        pipes = {
+            update: function(){
+                
+            },
+            
+            draw: function(ctx){
+                
+            }
+        };
         
         function main(){
             canvas = document.createElement("canvas");
@@ -51,6 +61,8 @@ var canvas, ctx, width, height,
             canvas.width = width;
             canvas.height = height;
             ctx = canvas.getContext("2d");
+            
+            currentstate = states.Splash;
             
             document.body.appendChild(canvas);
             
@@ -78,6 +90,9 @@ var canvas, ctx, width, height,
             frames++;
             
             fgpos = (fgpos - 2)%14;
+            
+            birb.update();
+            pipes.update();
         }
         
         function render(){ 
@@ -87,6 +102,7 @@ var canvas, ctx, width, height,
 	        s_bg.draw(ctx, s_bg.width, height - s_bg.height);
             
             birb.draw(ctx);
+            pipes.draw(ctx);
             
             s_fg.draw(ctx, fgpos, height - s_fg.height);
             s_fg.draw(ctx, fgpos+s_fg.width, height - s_fg.height);
