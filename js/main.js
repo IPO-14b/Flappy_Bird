@@ -7,7 +7,7 @@ var canvas, ctx, width, height,
         
         birb={
             x: 80,
-            y: 100,
+            y: 0,
             frame:0,
             animation: [0,1,2,1],
             rotation :0,
@@ -23,6 +23,25 @@ var canvas, ctx, width, height,
                 var n  = currentstate===states.Splash ? 10: 5;
                 this.frame+= frames % n === 0 ? 1: 0;
                 this.frame %=this.animation.length;
+                
+                if (currentstate === states.Splash){
+                    this.y = height-280+5*Math.cos(frames/10);
+                    this.rotation = 0;
+                }else{
+                    this.velocity+=this.gravity;
+                    this.y+= this.velocity;
+                    
+                    if(this.y>= height-s_fg.height-10){
+                        this.y=height - s_fg.height-10;
+                        
+                        if(currentstate===states.Game){
+                            currentstate=states.Score;
+                        }
+                        this.velocity = this._jump;
+                    }
+                    
+                    
+                }
             },
             
             draw: function(ctx){
@@ -52,11 +71,16 @@ var canvas, ctx, width, height,
             width=window.innerWidth;
             height = window.innerHeight;
             
+            var evt = "touchstart";
+            
             if(width>=500){
                 width=320;
                 height=480;
                 canvas.style.border="1px solid #000";
+                evt = "mousedown";
             }
+            
+            document.addEventListener(evt,onpress);
             
             canvas.width = width;
             canvas.height = height;
@@ -85,7 +109,23 @@ var canvas, ctx, width, height,
             }
             window.requestAnimationFrame(loop, canvas);
         }
-        
+ 
+        function onpress(evt){
+            switch(currentstate){
+                case states.Splash:
+                    currentstate = states.Game;
+                    birb.jump();
+                    break;
+                    
+                case states.Game:
+                    birb.jump();
+                    break;
+                    
+                case states.Score:
+                    break;
+            }
+        }
+
         function update(){
             frames++;
             
@@ -106,4 +146,11 @@ var canvas, ctx, width, height,
             
             s_fg.draw(ctx, fgpos, height - s_fg.height);
             s_fg.draw(ctx, fgpos+s_fg.width, height - s_fg.height);
+            
+            var width2 = width/2;
+            
+            if(currentstate === states.Splash){
+                s_splash.draw(ctx, width2-s_splash.width/2,height-300 );
+                s_text.GetReady.draw(ctx, width2 - s_text.GetReady.width/2, height-380);
+            }
         }
