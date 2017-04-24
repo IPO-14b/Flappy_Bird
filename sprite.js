@@ -9,6 +9,12 @@ function Sprite(img, x, y, width, height) {
 	this.height = height*2;
 };
 
+//Рисовать спрайт
+Sprite.prototype.draw = function(ctx, x, y) {
+	ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
+		x, y, this.width, this.height);
+};
+
 // Все спрайты
 function initSprites(img) {
 
@@ -45,7 +51,6 @@ function initSprites(img) {
 	s_numberS = new Sprite(img, 0, 177, 6,  7);
 	s_numberB = new Sprite(img, 0, 188, 7, 10);
 
-//	Рисовать
 	s_numberS.draw = s_numberB.draw = function(ctx, x, y, num, center, offset) {
 		num = num.toString();
 
