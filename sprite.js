@@ -1,4 +1,4 @@
-var s_bird, s_bg,s_fg, s_pipeNorth, s_pipeSouth, s_text, s_score, s_splash, s_buttons, s_numberS, s_numberB;
+var s_bird, s_bg, s_fg, s_pipeNorth, s_pipeSouth, s_text, s_score, s_splash, s_buttons, s_numberS, s_numberB;
 
 //Спрайт класс
 function Sprite(img, x, y, width, height) {
