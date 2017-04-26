@@ -196,6 +196,10 @@ var canvas, ctx, width, height,
 
                     var mx = evt.offsetX, my = evt.offsetY;
                     
+                    if(mx==null || my ==null){
+                        mx=evt.touches[0].clientX;
+                    }
+                    
                     if(okbtn.x<mx && mx<okbtn.x+okbtn.width &&
                        okbtn.y<my && my<okbtn.y+okbtn.height){
                         pipes.reset();
