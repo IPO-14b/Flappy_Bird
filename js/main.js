@@ -198,6 +198,7 @@ var canvas, ctx, width, height,
                     
                     if(mx==null || my ==null){
                         mx=evt.touches[0].clientX;
+                        my=evt.touches[0].clientY;
                     }
                     
                     if(okbtn.x<mx && mx<okbtn.x+okbtn.width &&
