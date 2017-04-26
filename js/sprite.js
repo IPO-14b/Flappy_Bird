@@ -1,6 +1,14 @@
 var s_bird, s_bg, s_fg, s_pipeNorth, s_pipeSouth, s_text, s_score, s_splash, s_buttons, s_numberS, s_numberB;
 
-//Спрайт класс
+/*
+ *Спрайт класс
+ *
+ *@param {Image}  img    спрайт каринка
+ * @param {number} x      x-позиция в спрайте
+ * @param {number} y      y-позиция в спрайте
+ * @param {number} width  ширина спрайта 
+ * @param {number} height высота спрайта
+ */
 function Sprite(img, x, y, width, height) {
 	this.img = img;
 	this.x = x*2;
@@ -9,13 +17,23 @@ function Sprite(img, x, y, width, height) {
 	this.height = height*2;
 };
 
-//Рисовать спрайт
+/*
+ *Рисовать спрайт в canvas (холст)
+ * 
+ * @param  {CanvasRenderingContext2D} ctx Контекст, используемый для рисования
+ * @param  {number} x   x-позиция чтобы рисовать на холсте
+ * @param  {number} y   y-позиция чтобы рисовать на холсте
+ */
 Sprite.prototype.draw = function(ctx, x, y) {
 	ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
 		x, y, this.width, this.height);
 };
 
-// Все спрайты
+/*
+ *Инициализация всех спрайтов
+ * 
+ * @param  {Image} img спрайт картинка
+ */
 function initSprites(img) {
 
 	s_bird = [
@@ -51,6 +69,17 @@ function initSprites(img) {
 	s_numberS = new Sprite(img, 0, 177, 6,  7);
 	s_numberB = new Sprite(img, 0, 188, 7, 10);
 
+    
+    /**
+	 * Рисовать цифры в canvas
+	 * 
+	 * @param  {CanvasRenderingContext2D} ctx Контекст, используемый для рисования
+	 * @param  {number} x      x-position
+	 * @param  {number} y      y-position
+	 * @param  {number} num    номер
+	 * @param  {number} center центрировать
+	 * @param  {number} offset отступ справа налево
+	 */
 	s_numberS.draw = s_numberB.draw = function(ctx, x, y, num, center, offset) {
 		num = num.toString();
 

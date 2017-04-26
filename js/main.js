@@ -4,9 +4,9 @@ var canvas, ctx, width, height,
         states = {
             Splash: 0, Game: 1, Score: 2
         },
-    
+    // Игровые объекты
         okbtn,
-        
+    // Птичка    
         birb={
             x: 80,
             y: 0,
@@ -18,10 +18,16 @@ var canvas, ctx, width, height,
             radius:12,
             _jump: 4.6,
             
+            /**
+             * Заставляет прыгать птичку
+             */
             jump: function(){
                 this.velocity = -this._jump;
             },
             
+            /**
+             * Обновляет спрайт птички при перемещении
+             */
             update: function(){
                 var n  = currentstate===states.Splash ? 10: 5;
                 this.frame+= frames % n === 0 ? 1: 0;
@@ -62,7 +68,7 @@ var canvas, ctx, width, height,
                 ctx.restore();
             }
         },
-        
+    // Труры    
         pipes = {
             
             _pipes: [],
@@ -73,6 +79,9 @@ var canvas, ctx, width, height,
 
             },
             
+        /**
+         * Создает , обновляет массив труб
+         */
             update: function(){
                if(frames%100===0){
                 var _y = height-(s_pipeSouth.height+s_fg.height+120+200*Math.random());
@@ -128,6 +137,9 @@ var canvas, ctx, width, height,
             }
         };
         
+        /**
+         * Начало и инициализация игры
+         */
         function main(){
             canvas = document.createElement("canvas");
             
@@ -171,7 +183,10 @@ var canvas, ctx, width, height,
             
             img.src = "res/sheet.png";
         }
-        
+
+        /**
+         * запуск и обновление игры
+         */
         function run(){
             var loop = function(){
                 update();
@@ -181,6 +196,12 @@ var canvas, ctx, width, height,
             window.requestAnimationFrame(loop, canvas);
         }
  
+        /**
+         * Вызывается по нажанию мыши. Обновление и изменение состояния
+         * в зависимости от текущего состояния игры.
+         * 
+         * @param  {MouseEvent/TouchEvent} evt событие нажатия 
+         */
         function onpress(evt){
             switch(currentstate){
                 case states.Splash:
@@ -212,6 +233,9 @@ var canvas, ctx, width, height,
             }
         }
 
+        /**
+         * Обновление положения переднего плана, птицы и труб
+         */
         function update(){
             frames++;
             
@@ -227,6 +251,9 @@ var canvas, ctx, width, height,
             birb.update();
         }
         
+        /**
+         * Рисует птицу и все трубы на холсте
+         */
         function render(){ 
             ctx.fillRect(0, 0, width, height);
             
