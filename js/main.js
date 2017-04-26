@@ -4,6 +4,8 @@ var canvas, ctx, width, height,
         states = {
             Splash: 0, Game: 1, Score: 2
         },
+    
+        okbtn,
         
         birb={
             x: 80,
@@ -13,6 +15,7 @@ var canvas, ctx, width, height,
             rotation :0,
             gravity: 0.25,
             velocity: 0,
+            radius:12,
             _jump: 4.6,
             
             jump: function(){
@@ -65,7 +68,9 @@ var canvas, ctx, width, height,
             _pipes: [],
             
             reset: function(){
-                
+
+                this._pipes = [];
+
             },
             
             update: function(){
@@ -80,6 +85,31 @@ var canvas, ctx, width, height,
                } 
                 for(var i = 0, len = this._pipes.length; i<len; i++){
                     var p = this._pipes[i];
+                    
+                    if(i===0){
+                        
+                        if(i===0){
+                            score+=p.x===birb.x ? 1:0;
+                        }
+                        
+                        var cx = Math.min(Math.max(birb.x, p.x), p.x+p.width);
+                        var cy1 = Math.min(Math.max(birb.y, p.y), p.y+p.height);
+                        var cy2 = Math.min(Math.max(birb.y, p.y+p.height+80), p.y+2*p.height+80);
+                    
+                        var dx = birb.x-cx;
+                        var dy1 = birb.y-cy1;
+                        var dy2 = birb.y-cy2;
+                        
+                        var d1 = dx*dx + dy1*dy1;
+                        var d2 = dx*dx + dy2*dy2;
+                        
+                        var r = birb.radius*birb.radius;
+                        
+                        if(r>d1||r>d2){
+                            currentstate = states.Score;
+                        }
+                    }
+
                     p.x-=2;
                     if (p.x<-50){
                         this._pipes.splice(i, 1);
@@ -128,6 +158,14 @@ var canvas, ctx, width, height,
             img.onload = function(){
                 initSprites(this);
                 ctx.fillStyle = s_bg.color;
+                
+                okbtn = {
+                    x:(width-s_buttons.Ok.width)/2,
+                    y: height-200,
+                    width: s_buttons.Ok.width,
+                    height: s_buttons.Ok.height
+                }
+                
                 run();
             }
             
@@ -155,6 +193,16 @@ var canvas, ctx, width, height,
                     break;
                     
                 case states.Score:
+
+                    var mx = evt.offsetX, my = evt.offsetY;
+                    
+                    if(okbtn.x<mx && mx<okbtn.x+okbtn.width &&
+                       okbtn.y<my && my<okbtn.y+okbtn.height){
+                        pipes.reset();
+                        currentstate = states.Splash;
+                        score = 0;
+                    }
+
                     break;
             }
         }
@@ -177,6 +225,7 @@ var canvas, ctx, width, height,
             s_bg.draw(ctx, 0, height - s_bg.height);
 	        s_bg.draw(ctx, s_bg.width, height - s_bg.height);
             
+            pipes.draw(ctx);
             birb.draw(ctx);
             pipes.draw(ctx);
             
@@ -189,4 +238,13 @@ var canvas, ctx, width, height,
                 s_splash.draw(ctx, width2-s_splash.width/2,height-300 );
                 s_text.GetReady.draw(ctx, width2 - s_text.GetReady.width/2, height-380);
             }
+            
+            if(currentstate=== states.Score){
+                s_text.GameOver.draw(ctx,width2-s_text.GameOver.width/2, height-400);
+                 s_score.draw(ctx,width2-s_score.width/2, height-340);
+                 s_buttons.Ok.draw(ctx,okbtn.x,okbtn.y);
+            } else{
+                s_numberB.draw(ctx, width2, 20, score);
+            }
+
         }
