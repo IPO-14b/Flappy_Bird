@@ -1,5 +1,5 @@
 var canvas, ctx, width, height,
-        frames=0, score=0, best=0, fgpos = 0,
+        frames=0, score=0, best=localStorage.getItem("best") || 0, fgpos = 0,
         currentstate,
         states = {
             Splash: 0, Game: 1, Score: 2
@@ -219,6 +219,7 @@ var canvas, ctx, width, height,
                 fgpos = (fgpos - 2)%14;
             }else{
                 best = Math.max(best,score);
+                localStorage.setItem("best", best);
             }
             if(currentstate === states.Game){
                 pipes.update();
