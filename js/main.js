@@ -212,6 +212,8 @@ var canvas, ctx, width, height,
             
             if(currentstate !=states.Score){
                 fgpos = (fgpos - 2)%14;
+            }else{
+                best = Math.max(best,score);
             }
             if(currentstate === states.Game){
                 pipes.update();
@@ -243,6 +245,9 @@ var canvas, ctx, width, height,
                 s_text.GameOver.draw(ctx,width2-s_text.GameOver.width/2, height-400);
                  s_score.draw(ctx,width2-s_score.width/2, height-340);
                  s_buttons.Ok.draw(ctx,okbtn.x,okbtn.y);
+                
+                s_numberS.draw(ctx, width2-47,height-304,score,null,10);
+                s_numberS.draw(ctx, width2-47,height-262,score,null,10);
             } else{
                 s_numberB.draw(ctx, width2, 20, score);
             }
