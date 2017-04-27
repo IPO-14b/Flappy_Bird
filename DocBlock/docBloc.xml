@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "docbookV4.5/docbookx.dtd" []>
+<article>
+  <title>Flappy bird</title>
+  <para>Браузерная игра, в которой игрок с помощью киликов мышью по экрану должен контролировать полёт птицы между рядами зелёных труб, не задевая их. </para>
+  <para>Flappy Bird имеет игровой процесс с участием 2D-графики.</para>
+  <para>Цель игры состоит в управлении полётом птицы, которая непрерывно передвигается между рядами зелёных труб. При столкновении с ними происходит завершение игры. Управление производится касанием экрана, при котором птица совершает небольшой рывок вверх. При отсутствии рывков птица падает из-за силы тяжести, и игра также завершается. Очки набираются при каждом успешном перелёте между двумя трубами. Геймплей не имеет изменений на протяжении всей игры.</para>
+  <abstract>
+    <title>Пример 1: Рисовать цифры в canvas</title>
+    <para>Функция позволяет осуществить, рисование, перемещение  цифр на холсте.</para>
+    <para>s_numberS.draw = s_numberB.draw = function(ctx, x, y, num, center, offset) {</para>
+    <para> num = num.toString();</para>
+    <para> var step = this.width + 2;</para>
+    <para> if (center) {</para>
+    <para>  x = center - (num.length*step-2)/2;</para>
+    <para> }</para>
+    <para> if (offset) {</para>
+    <para>  x += step*(offset - num.length);</para>
+    <para> }</para>
+    <para> for (var i = 0, len = num.length; i &lt; len; i++) {</para>
+    <para>  var n = parseInt(num[i]);</para>
+    <para>  ctx.drawImage(img, step*n, this.y, this.width, this.height,</para>
+    <para>   x, y, this.width, this.height)</para>
+    <para>  x += step; }</para>
+    <para>}</para>
+  </abstract>
+  <abstract>
+    <title>Пример 2: Обновление картины</title>
+    <para>Функция позволяет обновлять положения переднего плана, положение птицы и труб</para>
+    <para>function update(){</para>
+    <para>        frames++;</para>
+    <para>       if(currentstate !=states.Score){</para>
+    <para>           fgpos = (fgpos - 2)%14;</para>
+    <para>      }else{</para>
+    <para>          best = Math.max(best,score);</para>
+    <para>          localStorage.setItem(&quot;best&quot;, best);</para>
+    <para>      }</para>
+    <para>      if(currentstate === states.Game){</para>
+    <para>          pipes.update();</para>
+    <para>      }</para>
+    <para>     birb.update();</para>
+    <para> }</para>
+  </abstract>
+  <abstract>
+    <title>Пример 3: Обработки клика мыши</title>
+    <para>Вызывается по нажанию мыши.</para>
+    <para>Функция предоставляет возможность, обновления и изменения состояния в зависимости от текущего состояния игры.</para>
+    <para>function onpress(evt){</para>
+    <para>       switch(currentstate){</para>
+    <para>           case states.Splash:</para>
+    <para>              currentstate = states.Game;</para>
+    <para>              birb.jump();</para>
+    <para>              break;         </para>
+    <para>          case states.Game:</para>
+    <para>              birb.jump();</para>
+    <para>             break;       </para>
+    <para>         case states.Score:</para>
+    <para>             var mx = evt.offsetX, my = evt.offsetY;  </para>
+    <para>           if(mx==null || my ==null){</para>
+    <para>              mx=evt.touches[0].clientX;</para>
+    <para>             my=evt.touches[0].clientY;</para>
+    <para>          }                   </para>
+    <para>        if(okbtn.x  &lt;mx   &amp; &amp; mx  &lt;okbtn.x+okbtn.width &amp; &amp;</para>
+    <para>          okbtn.y  &lt;my &amp; &amp; my &lt;okbtn.y+okbtn.height){</para>
+    <para>           pipes.reset();</para>
+    <para>          currentstate = states.Splash;</para>
+    <para>        score = 0;</para>
+    <para>     }</para>
+    <para>     break;</para>
+    <para>}</para>
+    <para> }</para>
+  </abstract>
+</article>
