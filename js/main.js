@@ -68,7 +68,7 @@ var canvas, ctx, width, height,
                 ctx.restore();
             }
         },
-    // Труры    
+    // Трубы    
         pipes = {
             
             _pipes: [],
@@ -151,7 +151,6 @@ var canvas, ctx, width, height,
             if(width>=500){
                 width=320;
                 height=480;
-                canvas.style.border="1px solid #000";
                 evt = "mousedown";
             }
             
