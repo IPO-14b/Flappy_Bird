@@ -26,7 +26,7 @@ function Sprite(img, x, y, width, height) {
  */
 Sprite.prototype.draw = function(ctx, x, y) {
 	ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
-		x, y, this.width, this.height);
+	    x, y, this.width, this.height);
 };
 
 /*
@@ -65,11 +65,9 @@ function initSprites(img) {
 
 	s_score  = new Sprite(img, 138,  56, 113, 58);
 	s_splash = new Sprite(img,   0, 114,  59, 49);
-
 	s_numberS = new Sprite(img, 0, 177, 6,  7);
 	s_numberB = new Sprite(img, 0, 188, 7, 10);
-
-    
+  
     /**
 	 * Рисовать цифры в canvas
 	 * 
@@ -82,16 +80,13 @@ function initSprites(img) {
 	 */
 	s_numberS.draw = s_numberB.draw = function(ctx, x, y, num, center, offset) {
 		num = num.toString();
-
-		var step = this.width + 2;
-		
+		var step = this.width + 2;		
 		if (center) {
 			x = center - (num.length*step-2)/2;
 		}
 		if (offset) {
 			x += step*(offset - num.length);
 		}
-
 		for (var i = 0, len = num.length; i < len; i++) {
 			var n = parseInt(num[i]);
 			ctx.drawImage(img, step*n, this.y, this.width, this.height,
