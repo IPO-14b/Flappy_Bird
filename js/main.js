@@ -22,21 +22,21 @@ var okbtn,
         * Заставляет прыгать птичку
         */
        jump: function(){
-            this.velocity = -this._jump;
+           this.velocity = -this._jump;
        },
             
        /**
        * Обновляет спрайт птички при перемещении
        */
-       update: function(){
-            var n  = currentstate===states.Splash ? 10: 5;
-            this.frame+= frames % n === 0 ? 1: 0;
-            this.frame %=this.animation.length;
+       update: function(){    
+           var n  = currentstate===states.Splash ? 10: 5;
+           this.frame+= frames % n === 0 ? 1: 0;
+           this.frame %=this.animation.length;
                 
-            if (currentstate === states.Splash){
-                this.y = height-280+5*Math.cos(frames/10);
-                this.rotation = 0;
-            }else{
+           if (currentstate === states.Splash){
+               this.y = height-280+5*Math.cos(frames/10);
+               this.rotation = 0;
+           }else{
                 this.velocity+=this.gravity;
                 this.y+= this.velocity;
 
