@@ -1,6 +1,6 @@
 var s_bird, s_bg, s_fg, s_pipeNorth, s_pipeSouth, s_text, s_score, s_splash, s_buttons, s_numberS, s_numberB;
 
-/*
+/**
  *Спрайт класс
  *
  *@param {Image}  img    спрайт каринка
@@ -17,7 +17,7 @@ function Sprite(img, x, y, width, height) {
     this.height = height*2;
 };
 
-/*
+/**
  *Рисовать спрайт в canvas (холст)
  * 
  * @param  {CanvasRenderingContext2D} ctx Контекст, используемый для рисования
@@ -29,7 +29,7 @@ Sprite.prototype.draw = function(ctx, x, y) {
         x, y, this.width, this.height);
 };
 
-/*
+/**
  *Инициализация всех спрайтов
  * 
  * @param  {Image} img спрайт картинка
