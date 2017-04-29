@@ -58,8 +58,13 @@ var okbtn,
                 }
             }
         },
-            
-        draw: function(ctx){
+        
+            /**
+            * Рисовать птичку в canvas
+            * 
+            * @param  {CanvasRenderingContext2D} ctx Контекст, используемый для рисования
+            */
+            draw: function(ctx){
             ctx.save();
             ctx.translate(this.x,this.y);
             ctx.rotate(this.rotation);
@@ -69,6 +74,7 @@ var okbtn,
             ctx.restore();
             }
         },
+    
         // Трубы    
         pipes = {    
             _pipes: [],
@@ -122,6 +128,11 @@ var okbtn,
                 }
             },
             
+            /**
+            * Рисовать трубы в canvas
+            * 
+            * @param  {CanvasRenderingContext2D} ctx Контекст, используемый для рисования
+            */
             draw: function(ctx){
                 for(var i = 0, len = this._pipes.length; i<len; i++){
                     var p = this._pipes[i];
@@ -131,9 +142,9 @@ var okbtn,
             }
         };
         
-        /**
-         * Начало и инициализация игры
-         */
+    /**
+    * Начало и инициализация игры
+    */
     function main(){
         canvas = document.createElement("canvas");
         width=window.innerWidth;
