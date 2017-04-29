@@ -6,6 +6,7 @@ var canvas, ctx, width, height,
     
 // Игровые объекты
 var okbtn,
+    
     // Птичка    
     birb={
         x: 80, 
