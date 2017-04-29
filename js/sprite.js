@@ -30,3 +30,8 @@ function initSprites(img) {
         Ok:    new Sprite(img, 119, 191, 40, 14),
         Start: new Sprite(img, 159, 191, 40, 14)
 	}
+    s_score  = new Sprite(img, 138,  56, 113, 58);
+    s_splash = new Sprite(img,   0, 114,  59, 49);
+    s_numberS = new Sprite(img, 0, 177, 6,  7);
+    s_numberB = new Sprite(img, 0, 188, 7, 10);
+  
