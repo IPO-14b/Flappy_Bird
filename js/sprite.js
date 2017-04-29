@@ -16,3 +16,15 @@ function Sprite(img, x, y, width, height) {
     this.width = width*2;
     this.height = height*2;
 };
+
+/**
+ *Рисовать спрайт в canvas (холст)
+ * 
+ * @param  {CanvasRenderingContext2D} ctx Контекст, используемый для рисования
+ * @param  {number} x   x-позиция чтобы рисовать на холсте
+ * @param  {number} y   y-позиция чтобы рисовать на холсте
+ */
+Sprite.prototype.draw = function(ctx, x, y) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height,
+        x, y, this.width, this.height);
+};
