@@ -35,3 +35,11 @@ body {
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
+
+.header_text{
+    text-align: center;
+    font-family: "Roboto";
+    color: #fff;
+    font-size: 30pt;
+    text-shadow: -1px 1px 5px #242424;
+}
