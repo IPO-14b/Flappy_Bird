@@ -1,9 +1,25 @@
+/**
+*
+* Каринки для сцены
+*
+* @var object s_bird
+* @var object s_bg
+* @var object s_fg
+* @var object s_pipeNorth
+* @var object s_pipeSouth
+* @var object s_text
+* @var object s_score
+* @var object s_splash
+* @var object s_buttons
+* @var object s_numberS 
+* @var object s_numberB 
+*/
 var s_bird, s_bg, s_fg, s_pipeNorth, s_pipeSouth, s_text, s_score, s_splash, s_buttons, s_numberS, s_numberB;
 
 /**
  *Спрайт класс
  *
- *@param {Image}  img    спрайт каринка
+ * @param {Image}  img    спрайт каринка
  * @param {number} x      x-позиция в спрайте
  * @param {number} y      y-позиция в спрайте
  * @param {number} width  ширина спрайта 
@@ -11,10 +27,10 @@ var s_bird, s_bg, s_fg, s_pipeNorth, s_pipeSouth, s_text, s_score, s_splash, s_b
  */
 function Sprite(img, x, y, width, height) {
     this.img = img;
-    this.x = x*2;
-    this.y = y*2;
-    this.width = width*2;
-    this.height = height*2;
+    this.x = x * 2;
+    this.y = y * 2;
+    this.width = width * 2;
+    this.height = height * 2;
 };
 
 /**
@@ -80,14 +96,14 @@ function initSprites(img) {
         num = num.toString();
         var step = this.width + 2;		
         if (center) {
-            x = center - (num.length*step-2)/2;
+            x = center - (num.length * step - 2) / 2;
         }
         if (offset) {
-            x += step*(offset - num.length);
+            x += step * (offset - num.length);
         }
         for (var i = 0, len = num.length; i < len; i++) {
             var n = parseInt(num[i]);
-            ctx.drawImage(img, step*n, this.y, this.width, this.height, x, y, this.width, this.height)
+            ctx.drawImage(img, step * n, this.y, this.width, this.height, x, y, this.width, this.height)
             x += step;
         }
     }
